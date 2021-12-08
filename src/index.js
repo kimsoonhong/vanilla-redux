@@ -7,13 +7,13 @@ const number = document.getElementById("span");
 
 // 리듀셔는 함수고  데이터를 추적/수정 한다.
 const countModifier = (count = 0, action) => {
-	console.log(count, action);
-	if (action.type === "add") {
-		return count + 1;
-	} else if (action.type === "minus") {
-		return count - 2;
-	} else {
-		return count;
+	switch (action.type) {
+		case "add":
+			return count + 1;
+		case "minus":
+			return count - 1;
+		default:
+			return count;
 	}
 };
 
@@ -26,7 +26,7 @@ countStore.subscribe(onChange);
 
 //action은 오브잭트여야만 한다
 //리듀셔로 메시지를 보낸다.
-
+//type 이외엔 사용 할 수 없다. 반드시 type이여야 한다.
 add.addEventListener("click", () => countStore.dispatch({ type: "add" }));
 minus.addEventListener("click", () => countStore.dispatch({ type: "minus" }));
 
